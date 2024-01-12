@@ -61,6 +61,7 @@ class _HomeViewState extends State<HomeView> {
             onTap: (argument) {
               return Provider.of<MakeMarker>(context, listen: false)
                   .addMarker(CustomMarker(
+                    id: UniqueKey().hashCode,
                 latitude: argument.latitude,
                 longitude: argument.longitude,
                 label:
