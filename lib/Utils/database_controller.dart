@@ -21,13 +21,13 @@ class DatabaseController{
 
   Future<int> updateTODO(CustomMarker? todo) async {
     final db = await dbClient.db;
-    var result = await db.update("todoTable", todo!.toJSON(),where: "id = ?", whereArgs: [todo.id]);
+    var result = await db.update("timerTable", todo!.toJSON(),where: "id = ?", whereArgs: [todo.id]);
     return result;
   }
 
   Future<int> deleteTodo(int id) async {
     final db = await dbClient.db;
-    var result = await db.delete("todoTable", where: 'id = ?', whereArgs: [id]);
+    var result = await db.delete("timerTable", where: 'id = ?', whereArgs: [id]);
     return result;
   }
 }
