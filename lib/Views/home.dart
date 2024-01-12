@@ -19,20 +19,22 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-        // markers: ,
-        onTap: (argument) {
-          
-          // print(argument.latitude);
-          // print(argument.longitude);
-          context
-              .read<MakeMarker>()
-              .storeMaker(argument.latitude, argument.longitude);
+      body: Consumer<MakeMarker>(
+        builder: (BuildContext context, MakeMarker value, Widget? child) {
+          return GoogleMap(
+            mapType: MapType.hybrid,
+            initialCameraPosition: _kGooglePlex,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+            // markers: ,
+            onTap: (argument) {
+              // print(argument.latitude);
+              // print(argument.longitude);
+              return Provider.of<MakeMarker>(context, listen: false)
+                  .storeMaker(argument.latitude, argument.longitude);
+            },
+          );
         },
       ),
     );
