@@ -32,13 +32,21 @@ class HomeView extends StatelessWidget {
               return Marker(
                 markerId: MarkerId(marker.position.toString()),
                 position: marker.position,
-                infoWindow: InfoWindow(title: marker.label),
-                // Add other marker customization options
+                infoWindow: InfoWindow(
+                  title: marker.label,
+                  snippet: "Tap on it to remove",
+                  onTap: () => Provider.of<MakeMarker>(context, listen: false)
+                      .removeMarker(marker.id),
+                ),
               );
             }).toSet(),
             onTap: (argument) {
               return Provider.of<MakeMarker>(context, listen: false).addMarker(
-                  CustomMarker(position: argument, label: "My Label"));
+                  CustomMarker(
+                      position: argument,
+                      label:
+                          "Lat: ${argument.latitude}, Long : ${argument.longitude}",
+                      id: UniqueKey().hashCode));
             },
           );
         },

@@ -16,8 +16,8 @@ class MakeMarker extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeMarker(CustomMarker marker) {
-    _markers.remove(marker);
+  void removeMarker(int markerId) {
+    _markers.removeWhere((marker) => marker.id == markerId);
     notifyListeners();
   }
 }
