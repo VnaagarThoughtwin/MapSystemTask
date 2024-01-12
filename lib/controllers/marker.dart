@@ -10,12 +10,11 @@ class MakeMarker extends ChangeNotifier {
 
   List<CustomMarker> get markers => _markers;
 
-
- Future<void> getMarkers() async {
-   List<CustomMarker> todos = await repository.getAllMarkers();
+  Future<void> getMarkers() async {
+    List<CustomMarker> todos = await repository.getAllMarkers();
     _markers.addAll(todos);
-   notifyListeners();
- }
+    notifyListeners();
+  }
 
   void addMarker(CustomMarker marker) {
     _markers.add(marker);
@@ -25,6 +24,7 @@ class MakeMarker extends ChangeNotifier {
 
   void removeMarker(int markerId) {
     _markers.removeWhere((marker) => marker.id == markerId);
+    repository.deleteMarkers(markerId);
     notifyListeners();
   }
 }

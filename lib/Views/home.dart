@@ -22,11 +22,10 @@ class _HomeViewState extends State<HomeView> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-
   @override
   void initState() {
-    // Provider.of<MakeMarker>(context, listen: false)
-    //     .getMarkers();
+    Provider.of<MakeMarker>(context, listen: false)
+        .getMarkers();
     super.initState();
   }
 
@@ -35,6 +34,8 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       body: Consumer<MakeMarker>(
         builder: (BuildContext context, MakeMarker value, Widget? child) {
+          print(value.markers.length);
+
           return GoogleMap(
             mapType: MapType.hybrid,
             initialCameraPosition: HomeView._kGooglePlex,
@@ -43,24 +44,25 @@ class _HomeViewState extends State<HomeView> {
             },
             markers: value.markers.map((marker) {
               return Marker(
-                markerId: MarkerId(marker.id.toString()),
-                position: LatLng(marker.latitude??0,marker.longitude??0),
+                markerId: MarkerId(marker.location.toString()),
+                position: marker.location,
                 infoWindow: InfoWindow(
                   title: marker.label,
                   snippet: "Tap on it to remove",
                   onTap: () => Provider.of<MakeMarker>(context, listen: false)
-                      .removeMarker(marker.id??0),
+                      .removeMarker(marker.id ?? 0),
                 ),
               );
             }).toSet(),
             onTap: (argument) {
-              return Provider.of<MakeMarker>(context, listen: false).addMarker(
-                  CustomMarker(
-                      latitude: argument.latitude,
-                      longitude: argument.longitude,
-                      label:
-                          "Lat: ${argument.latitude}, Long : ${argument.longitude}",
-                      ));
+              return Provider.of<MakeMarker>(context, listen: false)
+                  .addMarker(CustomMarker(
+                latitude: argument.latitude,
+                longitude: argument.longitude,
+                label:
+                    "Lat: ${argument.latitude}, Long : ${argument.longitude}",
+                location: argument,
+              ));
             },
           );
         },

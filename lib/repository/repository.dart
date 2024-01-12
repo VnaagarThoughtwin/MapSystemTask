@@ -10,5 +10,5 @@ class Repository {
 
   Future updateTodo(CustomMarker? todo) => dbController.updateTODO(todo);
 
-  Future deleteTodo(int id) => dbController.deleteTodo(id);
+  Future deleteMarkers(int id) => dbController.deleteTodo(id);
 }
