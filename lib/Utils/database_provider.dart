@@ -29,7 +29,9 @@ class DatabaseProvider {
             '''CREATE TABLE timerTable (id INTEGER PRIMARY KEY, latitude REAL, longitude REAL, label TEXT)''');
       },
       onUpgrade: (Database db, int oldVersion, int newVersion) {
-        if (newVersion > oldVersion) {}
+        if (newVersion > oldVersion) {
+          
+        }
       },
     );
 

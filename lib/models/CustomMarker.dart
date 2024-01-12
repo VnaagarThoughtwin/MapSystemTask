@@ -5,9 +5,8 @@ class CustomMarker {
   String? label;
   double? latitude;
   double? longitude;
-  LatLng location;
 
-  CustomMarker({this.label, this.id, this.latitude, this.longitude,required this.location});
+  CustomMarker({this.label, this.id, this.latitude, this.longitude});
 
   factory CustomMarker.fromJSON(Map<String, dynamic> json) {
     return CustomMarker(
@@ -15,7 +14,7 @@ class CustomMarker {
       label: json['label'],
       latitude: json['latitude'],
       longitude: json['longitude'],
-      location: json['location'],
+      
     );
   }
 
@@ -25,7 +24,7 @@ class CustomMarker {
       'label': label,
       'longitude': longitude,
       'latitude': latitude,
-      'location': location,
+      
     };
   }
 }

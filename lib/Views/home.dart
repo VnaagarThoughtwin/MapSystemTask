@@ -24,8 +24,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
-    Provider.of<MakeMarker>(context, listen: false)
-        .getMarkers();
+    Provider.of<MakeMarker>(context, listen: false).getMarkers();
     super.initState();
   }
 
@@ -43,14 +42,19 @@ class _HomeViewState extends State<HomeView> {
               _controller.complete(controller);
             },
             markers: value.markers.map((marker) {
+              var latLong =
+                  LatLng(marker.latitude ?? 0.0, marker.longitude ?? 0.0);
+
               return Marker(
-                markerId: MarkerId(marker.location.toString()),
-                position: marker.location,
+                markerId: MarkerId(latLong.toString()),
+                position: latLong,
                 infoWindow: InfoWindow(
                   title: marker.label,
                   snippet: "Tap on it to remove",
-                  onTap: () => Provider.of<MakeMarker>(context, listen: false)
-                      .removeMarker(marker.id ?? 0),
+                  onTap: () {
+                    Provider.of<MakeMarker>(context, listen: false)
+                        .removeMarker(marker.id ?? 0);
+                  },
                 ),
               );
             }).toSet(),
@@ -61,7 +65,6 @@ class _HomeViewState extends State<HomeView> {
                 longitude: argument.longitude,
                 label:
                     "Lat: ${argument.latitude}, Long : ${argument.longitude}",
-                location: argument,
               ));
             },
           );
