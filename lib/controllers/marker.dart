@@ -7,9 +7,9 @@ class MakeMarker extends ChangeNotifier {
 
 
 
-// notifyListeners()
+  void storeMaker(double lat, double long) {
+    notifyListeners();
+  }
 
 
 }
-
-

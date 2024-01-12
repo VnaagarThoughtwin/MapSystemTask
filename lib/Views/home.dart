@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:system_task_on_map/controllers/marker.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
@@ -22,6 +24,15 @@ class HomeView extends StatelessWidget {
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
+        },
+        // markers: ,
+        onTap: (argument) {
+          
+          // print(argument.latitude);
+          // print(argument.longitude);
+          context
+              .read<MakeMarker>()
+              .storeMaker(argument.latitude, argument.longitude);
         },
       ),
     );
