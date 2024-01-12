@@ -26,10 +26,12 @@ class DatabaseProvider {
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
-            '''CREATE TABLE timerTable (id INTEGER PRIMARY KEY, project TEXT, task TEXT, description TEXT, isFav BOOLEAN, isCompleted BOOLEAN, createdAt DATETIME, playAT DATETIME, pauseAt DATETIME)''');
+            '''CREATE TABLE timerTable (id INTEGER PRIMARY KEY, latitude REAL, longitude REAL, label TEXT)''');
       },
       onUpgrade: (Database db, int oldVersion, int newVersion) {
-        if (newVersion > oldVersion) {}
+        if (newVersion > oldVersion) {
+          
+        }
       },
     );
 
